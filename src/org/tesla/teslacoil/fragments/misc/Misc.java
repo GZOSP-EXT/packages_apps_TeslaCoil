@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.carbonrom.carbonfibers.fragments.system;
+package org.tesla.teslacoil.fragments.misc;
 
 import android.content.Context;
 import android.content.ContentResolver;
@@ -32,7 +32,7 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -42,22 +42,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class System extends SettingsPreferenceFragment implements
+public class Misc extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "System";
+    private static final String TAG = "Misc";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.system);
+        addPreferencesFromResource(R.xml.misc);
 
         ContentResolver resolver = getActivity().getContentResolver();
     }
 
     @Override
-    protected int getMetricsCategory() {
-        return MetricsEvent.CARBONFIBERS;
+    public int getMetricsCategory() {
+        return MetricsEvent.TESLA;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class System extends SettingsPreferenceFragment implements
                             new ArrayList<SearchIndexableResource>();
 
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.system;
+                    sir.xmlResId = R.xml.misc;
                     result.add(sir);
                     return result;
                 }

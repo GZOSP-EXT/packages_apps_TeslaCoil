@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 CarbonROM
+ * Copyright (C) 2016 tesla
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.carbonrom.carbonfibers;
+package org.tesla.teslacoil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -49,7 +49,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
@@ -58,7 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class CarbonFibers extends SettingsPreferenceFragment implements Indexable {
+public class TeslaCoil extends SettingsPreferenceFragment implements Indexable {
 
     private static final int MENU_HELP  = 0;
     private static final String KEY_SYSTEM_MAIN_CATEGORY = "system_main_category";
@@ -69,7 +69,7 @@ public class CarbonFibers extends SettingsPreferenceFragment implements Indexabl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.cf_main_menu);
+        addPreferencesFromResource(R.xml.tesla_main_menu);
 
         setHasOptionsMenu(true);
     }
@@ -85,8 +85,8 @@ public class CarbonFibers extends SettingsPreferenceFragment implements Indexabl
     }
 
     @Override
-    protected int getMetricsCategory() {
-        return MetricsEvent.CARBONFIBERS;
+    public int getMetricsCategory() {
+        return MetricsEvent.TESLA;
     }
 
     @Override
@@ -96,8 +96,8 @@ public class CarbonFibers extends SettingsPreferenceFragment implements Indexabl
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(0, MENU_HELP, 0, R.string.carbonfibers_dialog_title)
-                .setIcon(R.drawable.ic_carbonfibers_info)
+        menu.add(0, MENU_HELP, 0, R.string.teslacoil_dialog_title)
+                .setIcon(R.drawable.ic_tesla_info)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
     }
 
@@ -107,7 +107,7 @@ public class CarbonFibers extends SettingsPreferenceFragment implements Indexabl
             case MENU_HELP:
                 showDialogInner(MENU_HELP);
                 Toast.makeText(getActivity(),
-                (R.string.carbonfibers_dialog_toast),
+                (R.string.teslacoil_dialog_toast),
                 Toast.LENGTH_LONG).show();
                 return true;
             default:
@@ -126,8 +126,8 @@ public class CarbonFibers extends SettingsPreferenceFragment implements Indexabl
 
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.carbonfibers_dialog_title)
-                .setMessage(R.string.carbonfibers_dialog_message)
+                .setTitle(R.string.teslacoil_dialog_title)
+                .setMessage(R.string.teslacoil_dialog_message)
                 .setCancelable(false)
                 .setNegativeButton(R.string.dlg_ok,
                     new DialogInterface.OnClickListener() {
@@ -152,7 +152,7 @@ public class CarbonFibers extends SettingsPreferenceFragment implements Indexabl
                             new ArrayList<SearchIndexableResource>();
 
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.cf_main_menu;
+                    sir.xmlResId = R.xml.tesla_main_menu;
                     result.add(sir);
                     return result;
                 }

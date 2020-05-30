@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.carbonrom.carbonfibers.fragments.privacy;
+package org.tesla.teslacoil.fragments.privacy;
 
 import android.content.Context;
 import android.content.ContentResolver;
@@ -45,7 +45,6 @@ import java.util.List;
 public class Privacy extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "Privacy";
-    private static final String CARBON_STATS = "crstats";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,7 @@ public class Privacy extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CARBONFIBERS;
+        return MetricsEvent.TESLA;
     }
 
     @Override
@@ -88,13 +87,6 @@ public class Privacy extends SettingsPreferenceFragment implements
                     sir.xmlResId = R.xml.privacy;
                     result.add(sir);
                     return result;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(CARBON_STATS);
-                    return keys;
                 }
             };
 }
