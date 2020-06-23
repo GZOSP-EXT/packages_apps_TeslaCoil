@@ -50,6 +50,7 @@ public class SmartPixels extends CustomSettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.smart_pixels);
+        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.smart_pixels_warning_text);
 
         addCustomPreference(findPreference(SMART_PIXELS_ENABLE), SYSTEM_TWO_STATE, STATE_OFF);
         addCustomPreference(findPreference(SMART_PIXELS_ON_POWER_SAVE), SYSTEM_TWO_STATE, STATE_OFF);
