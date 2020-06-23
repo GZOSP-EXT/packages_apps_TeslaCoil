@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 CarbonROM
+ * Copyright (C) 2018 CarbonROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +17,14 @@
 package org.tesla.teslacoil.fragments.system;
 
 import android.content.Context;
-import android.content.ContentResolver;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.preference.ListPreference;
-import android.preference.SwitchPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.provider.Settings;
 import android.provider.SearchIndexableResource;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.Utils;
+import com.android.settings.gzosp.CustomSettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
@@ -42,37 +33,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class System extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+public class System extends CustomSettingsPreferenceFragment implements Indexable {
     private static final String TAG = "System";
+    private static final String SMART_PIXELS = "smart_pixels";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.system);
-
-        ContentResolver resolver = getActivity().getContentResolver();
+        updateSmartPixelsPreference();
     }
 
-    @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.TESLA;
-    }
+    private void updateSmartPixelsPreference() {
+        PreferenceScreen prefSet = getPreferenceScreen();
+        boolean enableSmartPixels = getContext().getResources().
+                getBoolean(com.android.internal.R.bool.config_enableSmartPixels);
+        Preference smartPixels = findPreference(SMART_PIXELS);
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        return true;
+        if (!enableSmartPixels){
+            prefSet.removePreference(smartPixels);
+        }
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -92,6 +73,7 @@ public class System extends SettingsPreferenceFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(SMART_PIXELS);
                     return keys;
                 }
             };
