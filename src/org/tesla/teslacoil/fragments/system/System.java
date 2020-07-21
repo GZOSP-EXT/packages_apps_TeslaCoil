@@ -36,12 +36,15 @@ import java.util.List;
 public class System extends CustomSettingsPreferenceFragment implements Indexable {
     private static final String TAG = "System";
     private static final String SMART_PIXELS = "smart_pixels";
+    private static final String GLOBAL_ACTIONS = "global_actions";
+    private static final String ADVANCED_REBOOT = "advanced_reboot";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.system);
+        addCustomPreference(findPreference(ADVANCED_REBOOT), SECURE_TWO_STATE, STATE_ON);
         updateSmartPixelsPreference();
     }
 
@@ -74,6 +77,7 @@ public class System extends CustomSettingsPreferenceFragment implements Indexabl
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(SMART_PIXELS);
+                    keys.add(GLOBAL_ACTIONS);
                     return keys;
                 }
             };
